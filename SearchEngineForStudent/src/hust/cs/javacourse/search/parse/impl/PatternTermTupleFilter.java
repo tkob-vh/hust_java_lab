@@ -6,7 +6,7 @@ import hust.cs.javacourse.search.util.Config;
 
 import java.util.regex.Pattern;
 
-public class PatternTermTupleFilter extends AbstractTermTupleFilter(){
+public class PatternTermTupleFilter extends AbstractTermTupleFilter{
 
     private Pattern pattern = Pattern.compile(Config.TERM_FILTER_PATTERN);
 

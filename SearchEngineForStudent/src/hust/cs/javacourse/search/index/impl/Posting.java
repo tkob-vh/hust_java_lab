@@ -2,9 +2,13 @@ package hust.cs.javacourse.search.index.impl;
 
 import java.util.Objects;
 import java.io.*;
-import hust.cs.javacourse.search.index.AbstractTermTuple;
+import hust.cs.javacourse.search.index.*;
+import hust.cs.javacourse.search.index.impl.*;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
 
-public class Posting extends AbstractPosting,implements Comparable<AbstractPosting>, FileSerializable
+public class Posting extends AbstractPosting
 {
     public Posting(){
         super();
@@ -16,10 +20,15 @@ public class Posting extends AbstractPosting,implements Comparable<AbstractPosti
 
     @Override
     public boolean equals(Object obj){
-        if (obj instanceof AbstractPosting)
-        {
-            AbstractPosting posting = (AbstractPosting) obj;
-            return this.docId == posting.docId && this.freq == posting.freq && Objects.equals(this.positions, posting.positions);
+        if(obj == this)
+            return true;
+        else if(obj instanceof Posting){
+            Posting posting = (Posting)obj;
+            if(((Posting) obj).positions != null && this.positions != null)
+                return this.positions.size() == posting.positions.size() && this.positions.containsAll(((Posting) obj).positions)
+                 && this.docId == posting.docId && this.freq == posting.freq;
+            else if(posting.positions == null && this.positions == null)
+                return this.freq == posting.freq && this.docId == posting.docId;
         }
         return false;
     } 

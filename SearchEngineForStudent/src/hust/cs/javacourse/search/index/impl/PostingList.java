@@ -9,7 +9,7 @@ import hust.cs.javacourse.search.index.AbstractPosting;
 import hust.cs.javacourse.search.index.AbstractPostingList;
 
 
-public class PostingList extends AbstractPostingList, implements FileSerializable{
+public class PostingList extends AbstractPostingList{
 
     public void add(AbstractPosting posting){
         if(list.indexOf(posting) == -1){
