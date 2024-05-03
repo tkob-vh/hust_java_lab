@@ -1,10 +1,15 @@
 package hust.cs.javacourse.search.parse.impl;
 
 import hust.cs.javacourse.search.index.*;
+import hust.cs.javacourse.search.index.impl.*;
 import hust.cs.javacourse.search.parse.*;
 import hust.cs.javacourse.search.util.*;
 
-public class TermTupleScanner extends AbstractTermTupleScanner{
+import java.util.List;
+import java.util.ArrayList;
+import java.io.*;
+
+public class TermTupleScanner extends AbstractTermTupleScanner {
 
     private int position = 0;
     private List<String> buffer;
@@ -15,7 +20,7 @@ public class TermTupleScanner extends AbstractTermTupleScanner{
         stringSplitter.setSplitRegex(Config.STRING_SPLITTER_REGEX);
     }
 
-    public TermTupleScanner(BufferdReader input){
+    public TermTupleScanner(BufferedReader input){
         super(input);
         buffer = new ArrayList<>();
         stringSplitter.setSplitRegex(Config.STRING_SPLITTER_REGEX);
@@ -32,7 +37,7 @@ public class TermTupleScanner extends AbstractTermTupleScanner{
                 }
                 s = sb.toString().trim();
                 s = s.toLowerCase();
-                buf = stringSplitter.splitByRegex(s);
+                buffer = stringSplitter.splitByRegex(s);
             }
             AbstractTerm term = new Term(buffer.get(position));
             return new TermTuple(term, position++);

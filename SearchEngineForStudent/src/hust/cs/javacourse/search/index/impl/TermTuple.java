@@ -1,7 +1,8 @@
 package hust.cs.javacourse.search.index.impl;
 
 import java.util.Objects;
-import hust.cs.javacourse.search.index.AbstractTermTuple;
+import hust.cs.javacourse.search.index.*;
+import hust.cs.javacourse.search.index.impl.*;
 
 public class TermTuple extends AbstractTermTuple{
     
