@@ -16,10 +16,16 @@ public class TestBuildIndex {
      */
     public static void main(String[] args){
         AbstractIndexBuilder indexBuilder = new IndexBuilder(new DocumentBuilder());
+        System.out.println("Building index...");
         AbstractIndex index = indexBuilder.buildIndex(Config.DOC_DIR);
+        index.optimize();
         System.out.println(index.toString());
         File file = new File(Config.INDEX_DIR + "index.dat");
         index.save(file);
 
+        AbstractIndex index2 = new Index();
+        index2.load(new File(Config.INDEX_DIR + "index.dat"));
+        System.out.println("\n-------------------------\n");
+        System.out.println(index2.toString());
     }
 }

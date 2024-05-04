@@ -1,1 +1,7 @@
 *.class
+test-output/*
+log.txt
+test/index/
+test/ser/
+
+

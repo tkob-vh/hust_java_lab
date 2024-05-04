@@ -39,7 +39,10 @@ public class TermTupleScanner extends AbstractTermTupleScanner {
                 s = s.toLowerCase();
                 buffer = stringSplitter.splitByRegex(s);
             }
-            AbstractTerm term = new Term(buffer.get(position));
+            if(buffer.size() == 0)
+                return null;
+            AbstractTerm term = new Term(buffer.get(0));
+            buffer.remove(0);
             return new TermTuple(term, position++);
         }catch (IOException e){
             e.printStackTrace();
