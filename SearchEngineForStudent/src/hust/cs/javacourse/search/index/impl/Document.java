@@ -62,11 +62,10 @@ public class Document extends AbstractDocument{
 
     @Override
     public String toString(){
-        return "Document{" +
-                "docId=" + docId +
-                ", docPath='" + docPath +
-                ", tuples=" + tuples +
-                '}';
+        return "Document Info: " +
+                "docId = " + docId +
+                ", docPath = " + docPath +
+                ", tuples = " + tuples + "\n";
     }
 
 }

@@ -49,7 +49,7 @@ public class Hit extends AbstractHit {
 
     @Override
     public String toString(){
-        return "DocId: " + this.docId + "\nDocPath: " + this.docPath + "\nContent: " + this.content + "\nScore: " + this.score + "\nTermPostingMapping: " + this.termPostingMapping + "\n";
+        return "DocId: " + this.docId + "\nDocPath: " + this.docPath + "\nContent:\n" + this.content + "\nScore: " + this.score + "\nTermPostingMapping: " + this.termPostingMapping + "\n";
     }
 
     @Override
