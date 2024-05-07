@@ -19,7 +19,15 @@ public class PostingList extends AbstractPostingList{
 
     @Override
     public String toString(){
-        return list.toString();
+        StringBuilder sb = new StringBuilder();
+        sb.append("{");
+        for(AbstractPosting posting : list){
+            sb.append(posting.toString() + ", ");
+        }
+        sb.delete(sb.length() - 2, sb.length());
+        sb.append("}");
+
+        return sb.toString();
     }
 
     public void add(List<AbstractPosting> postings){

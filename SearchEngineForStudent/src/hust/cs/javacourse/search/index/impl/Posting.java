@@ -35,7 +35,7 @@ public class Posting extends AbstractPosting
 
     @Override
     public String toString(){
-        return "DocId: " + this.docId + ", word freq: " + this.freq + ", word positions: " + this.positions.toString();
+        return "docId: " + this.docId + ", word freq: " + this.freq + ", word positions: " + this.positions.toString();
     }
 
     public int getDocId(){

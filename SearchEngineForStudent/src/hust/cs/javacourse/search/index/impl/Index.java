@@ -16,7 +16,17 @@ public class Index extends AbstractIndex{
             return "Empty Index";
         }
         else{
-            return "docIdToDocPathMapping:\n" + docIdToDocPathMapping.toString() + "\n" + "termToPostingListMapping:\n" + termToPostingListMapping.toString() + "\n";
+            StringBuilder sb = new StringBuilder();
+            for(Map.Entry<Integer, String> entry : docIdToDocPathMapping.entrySet()){
+                sb.append("docId: " + entry.getKey() + ", docPath: " + entry.getValue() + "\n");
+            }
+            sb.append("\n");
+            for(Map.Entry<AbstractTerm, AbstractPostingList> entry : termToPostingListMapping.entrySet()){
+                sb.append("term: " + entry.getKey() + " ----> posting: " + entry.getValue() + "\n");
+            }
+            sb.append("\n");
+
+            return sb.toString();
         }
     }
 
