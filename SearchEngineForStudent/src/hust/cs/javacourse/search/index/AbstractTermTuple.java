@@ -34,6 +34,14 @@ public abstract class AbstractTermTuple {
     @Override
     public abstract boolean equals(Object obj);
 
+    public AbstractTermTuple(){
+
+    }
+
+    public AbstractTermTuple(AbstractTerm term, int curPos){
+        this.term = term;
+        this.curPos = curPos;
+    }
     /**
      * 获得三元组的字符串表示
      * @return ： 三元组的字符串表示
