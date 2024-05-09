@@ -20,12 +20,11 @@ public class PostingList extends AbstractPostingList{
     @Override
     public String toString(){
         StringBuilder sb = new StringBuilder();
-        sb.append("{");
+        sb.append("{\n");
         for(AbstractPosting posting : list){
-            sb.append(posting.toString() + ", ");
+            sb.append(posting.toString() + "\n");
         }
-        sb.delete(sb.length() - 2, sb.length());
-        sb.append("}");
+        sb.append("}\n");
 
         return sb.toString();
     }
