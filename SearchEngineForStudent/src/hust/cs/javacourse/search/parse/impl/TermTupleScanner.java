@@ -29,7 +29,7 @@ public class TermTupleScanner extends AbstractTermTupleScanner {
     @Override
     public AbstractTermTuple next(){
         try{
-            if(buffer.isEmpty()){
+            if(buffer.isEmpty()){ // if the input haven't been read
                 String s;
                 StringBuilder sb = new StringBuilder();
                 while((s = input.readLine()) != null){
@@ -39,10 +39,9 @@ public class TermTupleScanner extends AbstractTermTupleScanner {
                 s = s.toLowerCase();
                 buffer = stringSplitter.splitByRegex(s);
             }
-            if(buffer.size() == 0)
+            if(position >= buffer.size())
                 return null;
-            AbstractTerm term = new Term(buffer.get(0));
-            buffer.remove(0);
+            AbstractTerm term = new Term(buffer.get(position));
             return new TermTuple(term, position++);
         }catch (IOException e){
             e.printStackTrace();

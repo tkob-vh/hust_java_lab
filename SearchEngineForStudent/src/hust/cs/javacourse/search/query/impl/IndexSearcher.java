@@ -170,4 +170,61 @@ public class IndexSearcher extends AbstractIndexSearcher {
 
         return list.toArray(new AbstractHit[0]);
     }
+
+    public AbstractHit[] search(AbstractTerm queryTerm1, AbstractTerm queryTerm2, Sort sorter){
+        AbstractPostingList postingList1 = index.search(queryTerm1);
+        AbstractPostingList postingList2 = index.search(queryTerm2);
+        
+        if(postingList1 == null || postingList2 == null)
+        {
+            System.out.println("Can not find the phrase in the index, postingList is null");
+            return null;
+        }
+
+        List<AbstractHit> list = new ArrayList<>();
+        int i = 0, j = 0;
+        while(i < postingList1.size() && j < postingList2.size()){
+            AbstractPosting posting1 = postingList1.get(i);
+            AbstractPosting posting2 = postingList2.get(j);
+
+            int docId1 = posting1.getDocId();
+            int docId2 = posting2.getDocId();
+            
+            if(docId1 == docId2 && docId1 != -1){
+                List<Integer> position1 = posting1.getPositions();
+                List<Integer> position2 = posting2.getPositions();
+
+                List<Integer> curPosition = new ArrayList<>();
+                
+                int m = 0, n = 0;
+                while(m < position1.size() && n < position2.size()){
+                    int curPos1 = position1.get(m);
+                    int curPos2 = position2.get(n);
+
+                    if(curPos2 - curPos1 == 1){
+                        curPosition.add(curPos1);
+                        m++; n++;
+                    }
+                    else if(curPos1 < curPos2 - 2) m++;
+                    else if(curPos2 < curPos1 - 2) n++;
+                }
+                if(!curPosition.isEmpty()){
+                    String path = index.getDocName(docId1);
+                    HashMap<AbstractTerm, AbstractPosting> map = new HashMap<>();
+
+                    map.put(queryTerm1, posting1);
+                    map.put(queryTerm2, posting2);
+
+                    AbstractHit hit = new Hit(docId1, path, map);
+                    hit.setScore(sorter.score(hit));
+                    list.add(hit);
+                }
+                i++; j++;
+            }
+            else if(docId1 < docId2) i++;
+            else j++;
+        }
+        sorter.sort(list);
+        return list.toArray(new AbstractHit[0]);
+    }
 }

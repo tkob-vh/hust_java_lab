@@ -82,9 +82,9 @@ public class Index extends AbstractIndex{
     @Override
     public void optimize(){
         for(Map.Entry<AbstractTerm, AbstractPostingList> entry : termToPostingListMapping.entrySet()){
-            entry.getValue().sort();
+            entry.getValue().sort(); // Sort the postingList by the docId of each posting.
             for(int i = 0; i < entry.getValue().size(); i++){
-                Collections.sort(entry.getValue().get(i).getPositions());
+                Collections.sort(entry.getValue().get(i).getPositions()); // Sort the positions of each posting.
             }
         }
     }

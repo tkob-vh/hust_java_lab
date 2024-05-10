@@ -40,6 +40,16 @@ public class TestSearchIndex {
                     }
                     System.out.println("Please input the query or input Q/q to exit:");
                 }
+                else if(split.length == 2){
+                    AbstractHit[] hits = indexSearcher.search(new Term(split[0]), new Term(split[1]), sorter);
+                    if(hits == null){
+                        System.out.println("Phrase not found.");
+                    }
+                    else for(AbstractHit hit : hits){
+                        System.out.println(hit.toString());
+                    }
+                    System.out.println("Please input the query or input Q/q to exit:");
+                }
                 else if(split.length == 3){
                     AbstractHit[] hits = indexSearcher.search(new Term(split[0]), new Term(split[2]), sorter, AbstractIndexSearcher.LogicalCombination.valueOf(split[1]));
                     if(hits == null)
