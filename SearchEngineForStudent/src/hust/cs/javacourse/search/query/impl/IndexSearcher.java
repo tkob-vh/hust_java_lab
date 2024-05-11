@@ -205,15 +205,14 @@ public class IndexSearcher extends AbstractIndexSearcher {
                         curPosition.add(curPos1);
                         m++; n++;
                     }
-                    else if(curPos1 < curPos2 - 2) m++;
-                    else if(curPos2 < curPos1 - 2) n++;
+                    else if(curPos1 < curPos2) m++;
+                    else n++;
                 }
                 if(!curPosition.isEmpty()){
                     String path = index.getDocName(docId1);
                     HashMap<AbstractTerm, AbstractPosting> map = new HashMap<>();
 
-                    map.put(queryTerm1, posting1);
-                    map.put(queryTerm2, posting2);
+                    map.put(new Term(queryTerm1.getContent() + " " + queryTerm2.getContent()), new Posting(docId1, curPosition.size(),curPosition));
 
                     AbstractHit hit = new Hit(docId1, path, map);
                     hit.setScore(sorter.score(hit));
