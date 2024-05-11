@@ -12,10 +12,20 @@ public class StopWordTermTupleFilter extends AbstractTermTupleFilter{
     private List<String> stopWords = Arrays.asList(StopWords.STOP_WORDS);
 
 
+    /**
+     * Constructor with parameters.
+     * @param input: the input stream.
+     */
     public StopWordTermTupleFilter(AbstractTermTupleStream input){
         super(input);
     }
 
+
+    /**
+     * Get the next AbstractTermTuple in the stream.
+     * @author yyxx
+     * @return the next AbstractTermTuple in the stream, return null if reach the end of the stream
+     */
     @Override
     public AbstractTermTuple next(){
         AbstractTermTuple termTuple = input.next();

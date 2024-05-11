@@ -30,6 +30,11 @@ public class Index extends AbstractIndex{
         }
     }
 
+    /**
+     * Add a document to the index.
+     * @author yyx
+     * @param document: the document to be added.
+     */
     public void addDocument(AbstractDocument document){
         HashMap<AbstractTerm,List<Integer>> map = new HashMap<>();
         for(AbstractTermTuple termTuple : document.getTuples()){
@@ -49,6 +54,11 @@ public class Index extends AbstractIndex{
         }
     }
 
+    /**
+     * Load the index from the index file which have been saved before.
+     * @author yyx
+     * @param file: the index file to be loaded.
+     */
     @Override
     public void load(File file){
         try{
@@ -59,6 +69,11 @@ public class Index extends AbstractIndex{
         }
     }
 
+    /**
+     * Write the index to the index file.
+     * @author yyx
+     * @param file: the index file to be written.
+     */
     @Override
     public void save(File file){
         try{
@@ -69,16 +84,31 @@ public class Index extends AbstractIndex{
         } 
     }
 
+    /**
+     * Return the posting list of a specific term.
+     * @author yyx
+     * @param term: the term to be searched.
+     * @return the posting list of the term.
+     */
     @Override
     public AbstractPostingList search(AbstractTerm term){
         return termToPostingListMapping.getOrDefault(term, null);
     }
 
+    /**
+     * Return the dictionary of the index, which is a set of terms in the index.
+     * @author yyx
+     * @return the dictionary of the index.
+     */
     @Override
     public Set<AbstractTerm> getDictionary(){
         return termToPostingListMapping.keySet();
     }
 
+    /**
+     * Optimize the index, including sorting the postingList according to their docId, and sorting the position list of each posting.
+     * @author yyx
+     */
     @Override
     public void optimize(){
         for(Map.Entry<AbstractTerm, AbstractPostingList> entry : termToPostingListMapping.entrySet()){
@@ -94,6 +124,10 @@ public class Index extends AbstractIndex{
         return docIdToDocPathMapping.getOrDefault(docId, null);
     }
 
+    /**
+     * Write the object to the output stream.
+     * @auther yyx
+     */
     @Override
     public void writeObject(ObjectOutputStream out){
         try{
@@ -104,6 +138,10 @@ public class Index extends AbstractIndex{
         }
     }
 
+    /**
+     * Read the object from the input stream.
+     * @author yyx
+     */
     @Override
     public void readObject(ObjectInputStream in){
         try{

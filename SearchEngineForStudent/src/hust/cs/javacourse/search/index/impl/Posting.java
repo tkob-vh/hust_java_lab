@@ -14,6 +14,14 @@ public class Posting extends AbstractPosting
         super();
     }
 
+
+    /**
+     * Constructor with parameters.
+     * @author yyx
+     * @param docId: the docId of the document.
+     * @param freq: the frequency of the word in the document.
+     * @param positions: the positions of the word in the document.
+     */
     public Posting(int docId, int freq, List<Integer> positions){
         super(docId, freq, positions);
     }

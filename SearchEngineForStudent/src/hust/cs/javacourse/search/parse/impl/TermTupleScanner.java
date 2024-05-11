@@ -15,17 +15,33 @@ public class TermTupleScanner extends AbstractTermTupleScanner {
     private List<String> buffer;
     private StringSplitter stringSplitter = new StringSplitter();
 
+
+    /**
+     * Default constructor.
+     * @author yyx
+     */
     public TermTupleScanner(){
         buffer = new ArrayList<>();
         stringSplitter.setSplitRegex(Config.STRING_SPLITTER_REGEX);
     }
 
+    /**
+     * Constructor with parameters.
+     * @author yyx
+     * @param input: the input stream.
+     */
     public TermTupleScanner(BufferedReader input){
         super(input);
         buffer = new ArrayList<>();
         stringSplitter.setSplitRegex(Config.STRING_SPLITTER_REGEX);
     }
 
+
+    /**
+     * Return the next AbstractTermTuple in the input stream. 
+     * @author yyx
+     * @return: the next AbstractTermTuple in the input stream, return null if reach the end of the input.
+     */
     @Override
     public AbstractTermTuple next(){
         try{

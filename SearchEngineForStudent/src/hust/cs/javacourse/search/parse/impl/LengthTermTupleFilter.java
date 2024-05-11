@@ -7,10 +7,23 @@ import hust.cs.javacourse.search.util.Config;
 
 public class LengthTermTupleFilter extends AbstractTermTupleFilter {
 
+
+    /**
+     * Constructor with parameters.
+     * @author yyx
+     * @param input: the input stream.
+     */
     public LengthTermTupleFilter(AbstractTermTupleStream input){
         super(input);
     }
 
+
+
+    /**
+     * Get the next AbstractTermTuple in the stream.
+     * @author yyx
+     * @return the next AbstractTermTuple in the stream, return null if reach the end of the stream
+     */
     @Override
     public AbstractTermTuple next(){
         AbstractTermTuple termTuple = input.next();

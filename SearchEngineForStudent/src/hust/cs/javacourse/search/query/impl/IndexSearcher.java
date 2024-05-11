@@ -12,12 +12,24 @@ import java.util.Map;
 
 public class IndexSearcher extends AbstractIndexSearcher {
 
+    /**
+     * Default constructor
+     * @author yyx
+     * @parem index: the index to be searched
+     */
     @Override
     public void open(String indexFile) {
         index.load(new File(indexFile));
         index.optimize();
     }
 
+    /**
+     * Search for documents that contain the term and return the result in the form of AbstractHit
+     * @author yyx
+     * @param queryTerm: the term to be searched
+     * @param sorter: the sorter to sort the result
+     * @return: the result in the form of AbstractHit
+     */
     @Override
     public AbstractHit[] search(AbstractTerm queryTerm, Sort sorter){
         AbstractPostingList postingList = index.search(queryTerm);
@@ -43,6 +55,15 @@ public class IndexSearcher extends AbstractIndexSearcher {
     }
 
 
+    /**
+     * Search for documents that contain both/either of the two terms and return the result in the form of AbstractHit
+     * @author yyx
+     * @param queryTerm1: the first term to be searched
+     * @param queryTerm2: the second term to be searched
+     * @param sorter: the sorter to sort the result
+     * @param combine: the logical combination of the two terms
+     * @return the result in the form of AbstractHit
+     */
     @Override
     public AbstractHit[] search(AbstractTerm queryTerm1, AbstractTerm queryTerm2, Sort sorter, LogicalCombination combine){
         AbstractPostingList postingList1 = index.search(queryTerm1);
@@ -171,6 +192,15 @@ public class IndexSearcher extends AbstractIndexSearcher {
         return list.toArray(new AbstractHit[0]);
     }
 
+
+    /**
+     * Search for documents that contain the phrase and return the result in the form of AbstractHit
+     * @author yyx
+     * @param queryTerm1: the first term to be searched
+     * @param queryTerm2: the second term to be searched
+     * @param sorter: the sorter to sort the result
+     * @return the result in the form of AbstractHit
+     */
     public AbstractHit[] search(AbstractTerm queryTerm1, AbstractTerm queryTerm2, Sort sorter){
         AbstractPostingList postingList1 = index.search(queryTerm1);
         AbstractPostingList postingList2 = index.search(queryTerm2);
