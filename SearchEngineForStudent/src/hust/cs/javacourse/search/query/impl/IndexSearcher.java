@@ -47,10 +47,18 @@ public class IndexSearcher extends AbstractIndexSearcher {
             HashMap<AbstractTerm, AbstractPosting> map = new HashMap<>();
             map.put(queryTerm, posting);
             AbstractHit hit = new Hit(posting.getDocId(), path, map);
-            hit.setScore(sorter.score(hit));
+
+            if(sorter != null){
+                double score = sorter.score(hit);
+                hit.setScore(score);
+            }
+            // hit.setScore(sorter.score(hit));
             list.add(hit);
         }
 
+        if(sorter != null){
+            sorter.sort(list);
+        }
         return list.toArray(new AbstractHit[0]);
     }
 
